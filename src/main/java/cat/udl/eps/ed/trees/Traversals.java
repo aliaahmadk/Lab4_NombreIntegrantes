@@ -1,5 +1,8 @@
 package cat.udl.eps.ed.trees;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Traversals {
 
 public static <E> List<E> inorder(BinaryTree<E> tree) {

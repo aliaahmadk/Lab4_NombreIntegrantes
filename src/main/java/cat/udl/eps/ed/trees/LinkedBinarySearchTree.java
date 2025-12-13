@@ -57,6 +57,7 @@ public class LinkedBinarySearchTree<K, V> implements BinarySearchTree<K, V>,Bina
     public Pair<K, V> root(){
         // ¿?
     }
+
     @Override
     public LinkedBinarySearchTree<K, V> left() {
         // ¿?
