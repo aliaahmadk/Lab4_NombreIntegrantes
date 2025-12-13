@@ -1,7 +1,9 @@
 package cat.udl.eps.ed.trees;
+
+
 import java.util.Comparator;
 
-public class LinkedBinarySearchTree<K, V> implements BinarySearchTree<K, V> {
+public class LinkedBinarySearchTree<K, V> implements BinarySearchTree<K, V>,BinaryTree<Pair<K, V>> {
 
 
     private final Node<K, V> root;
@@ -50,6 +52,25 @@ public class LinkedBinarySearchTree<K, V> implements BinarySearchTree<K, V> {
     public LinkedBinarySearchTree<K, V> remove(K key) {
         // ¿?
     }
+
+    @Override
+    public Pair<K, V> root(){
+        // ¿?
+    }
+    @Override
+    public LinkedBinarySearchTree<K, V> left() {
+        // ¿?
+    }
+    @Override
+    public LinkedBinarySearchTree<K, V> right() {
+        // ¿?
+    }
+
+
+
+
 }
+
+
 
 
