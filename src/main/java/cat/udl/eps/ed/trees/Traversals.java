@@ -19,4 +19,6 @@ private static <E> void inorderRec(List<E> result,
     }
 }
 
+public static <E> List<E> inorderIterative(BinaryTree<E> tree) { ¿? }
+
 }
