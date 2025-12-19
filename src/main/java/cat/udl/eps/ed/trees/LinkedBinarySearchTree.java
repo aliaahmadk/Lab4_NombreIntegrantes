@@ -75,46 +75,76 @@ public class LinkedBinarySearchTree<K, V> implements BinarySearchTree<K, V>,Bina
 
     @Override
     public LinkedBinarySearchTree<K, V> put(K key, V value) {
-
         Node<K, V> newRoot = put(root, key, value);
         return new LinkedBinarySearchTree<>(comparator, newRoot);
-
     }
 
     private Node<K, V> put(Node<K, V> node, K key, V value) {
         if (node == null) {
             return new Node<>(key, value, null, null);
         }
-
-    //falta acabar
-
+        //falta acabar
 
     }
 
     @Override
     public LinkedBinarySearchTree<K, V> remove(K key) {
-        // ¿?
+        Node<K, V> newRoot = remove(root, key);
+        return new LinkedBinarySearchTree<>(comparator, newRoot);
+    }
+
+    private Node<K, V> remove(Node<K, V> node, K key) {
+        if (node == null) {
+            return null; // Key not found
+        }
+        int cmp = comparator.compare(key, node.key);
+        if (cmp < 0) {
+            return new Node<>(node.key, node.value, remove(node.left, key), node.right);
+        } else if (cmp > 0) {
+            return new Node<>(node.key, node.value, node.left, remove(node.right, key));
+        } else { // Key found
+            if (node.left == null) return node.right;
+            if (node.right == null) return node.left;
+
+            Node<K, V> minNode = findMin(node.right);
+            return new Node<>(minNode.key, minNode.value, node.left, removeMin(node.right));
+        }
+    }
+
+    private Node<K, V> findMin(Node<K, V> node) {
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
+    }
+
+    private Node<K, V> removeMin(Node<K, V> node) {
+        if (node.left == null) {
+            return node.right;
+        }
+        return new Node<>(node.key, node.value, removeMin(node.left), node.right);
     }
 
     @Override
     public Pair<K, V> root(){
-        // ¿?
+        if (isEmpty()) {
+            throw new IllegalStateException("Tree is empty");
+        }
+        return new Pair<>(root.key, root.value);
     }
 
     @Override
     public LinkedBinarySearchTree<K, V> left() {
-        // ¿?
+        if (isEmpty()) {
+            throw new IllegalStateException("Tree is empty");
+        }
+        return new LinkedBinarySearchTree<>(comparator, root.left);
     }
     @Override
     public LinkedBinarySearchTree<K, V> right() {
-        // ¿?
+        if (isEmpty()) {
+            throw new IllegalStateException("Tree is empty");
+        }
+        return new LinkedBinarySearchTree<>(comparator, root.right);
     }
-
-
-
-
 }
-
-
-
-
