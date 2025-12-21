@@ -3,7 +3,9 @@ package cat.udl.eps.ed.trees;
 
 import java.util.Comparator;
 
+
 public class LinkedBinarySearchTree<K, V> implements BinarySearchTree<K, V>,BinaryTree<Pair<K, V>> {
+
 
 
     private final Node<K, V> root;
@@ -22,6 +24,7 @@ public class LinkedBinarySearchTree<K, V> implements BinarySearchTree<K, V>,Bina
             this.left = left;
             this.right = right;
         }
+
 
     }
 
@@ -55,14 +58,14 @@ public class LinkedBinarySearchTree<K, V> implements BinarySearchTree<K, V>,Bina
 
         while (present_node != null) {
 
-            int comparation = comparator.compare(key, present_node.key); // We use comparator because it can be anything
+            int cmp = comparator.compare(key, present_node.key); // We use comparator because it can be anything
 
 
-            if (comparation == 0) {
+            if (cmp == 0) {
                 return present_node.value; // we found it
 
             //The search will be going till finding the key
-            } else if (comparation < 0) {
+            } else if (cmp < 0) {
                 present_node = present_node.left;
 
             } else {
