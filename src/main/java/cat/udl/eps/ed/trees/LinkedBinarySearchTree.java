@@ -83,7 +83,18 @@ public class LinkedBinarySearchTree<K, V> implements BinarySearchTree<K, V>,Bina
         if (node == null) {
             return new Node<>(key, value, null, null);
         }
-        //falta acabar
+        int cmp = comparator.compare(key, node.key);
+
+        if (cmp < 0) {
+            // as the key is smaller, we go on the left side
+            return new Node<>(node.key, node.value, put(node.left, key, value), node.right);
+        } else if (cmp > 0) {
+            // as the key is bigger, we go on the right side.
+            return new Node<>(node.key, node.value, node.left, put(node.right, key, value));
+        } else {
+            // if already exists, simply replace.
+            return new Node<>(key, value, node.left, node.right);
+        }
 
     }
 
