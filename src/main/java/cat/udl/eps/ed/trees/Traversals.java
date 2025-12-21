@@ -1,6 +1,8 @@
 package cat.udl.eps.ed.trees;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public class Traversals {
@@ -19,6 +21,24 @@ private static <E> void inorderRec(List<E> result,
     }
 }
 
-public static <E> List<E> inorderIterative(BinaryTree<E> tree) { ¿? }
+public static <E> List<E> inorderIterative(BinaryTree<E> tree) {
 
+    List<E> result = new ArrayList<>();
+    Deque<BinaryTree<E>> stack = new ArrayDeque<>();
+    BinaryTree<E> current = tree;
+    while (!stack.isEmpty() || (current != null && !current.isEmpty())) {
+
+        while (current != null && !current.isEmpty()) {
+            stack.push(current);
+            current = current.left();
+        }
+        current = stack.pop();
+        result.add(current.root());
+        current = current.right();
+    }
+
+    return result;
 }
+}
+
+
