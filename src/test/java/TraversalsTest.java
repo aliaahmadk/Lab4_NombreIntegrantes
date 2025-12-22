@@ -68,7 +68,7 @@ class TraversalsTest {
         List<Pair<Integer, String>> iterResult = Traversals.inorderIterative(tree);
 
         // Check that they have the same amount of elements
-        assertEquals(recResult.size(), iterResult.size(), "Lists should have same length");
+        assertEquals(recResult.size(), iterResult.size(), "Both should have same length");
 
         // Compare more precisely
         for (int i = 0; i < recResult.size(); i++) {
