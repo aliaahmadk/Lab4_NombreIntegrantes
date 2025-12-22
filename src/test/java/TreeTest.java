@@ -34,13 +34,11 @@ class TreeTest {
 
     @Test
     void testGetAndContainsKey() {
-        // Test keys that exist
         assertEquals("Ocho", tree.get(8));
         assertEquals("Uno", tree.get(1));
         assertEquals("Trece", tree.get(13));
         assertTrue(tree.containsKey(6));
 
-        // Test key that does not exist
         assertNull(tree.get(99));
         assertFalse(tree.containsKey(99));
     }
@@ -49,11 +47,10 @@ class TreeTest {
     void testPutNewKey() {
         BinarySearchTree<Integer, String> newTree = tree.put(5, "Cinco");
 
-        // Check new key exists in the new tree
+
         assertTrue(newTree.containsKey(5));
         assertEquals("Cinco", newTree.get(5));
 
-        // Check original tree is not modified (immutability)
         assertFalse(tree.containsKey(5));
         assertNull(tree.get(5));
     }
@@ -62,63 +59,52 @@ class TreeTest {
     void testPutExistingKey() {
         BinarySearchTree<Integer, String> updatedTree = tree.put(8, "OCHO-MODIFICADO");
 
-        // Check the value is updated in the new tree
         assertEquals("OCHO-MODIFICADO", updatedTree.get(8));
         assertTrue(updatedTree.containsKey(8));
-
-        // Check original tree is not modified (immutability)
         assertEquals("Ocho", tree.get(8));
     }
 
     @Test
     void testRemoveLeafNode() {
-        BinarySearchTree<Integer, String> newTree = tree.remove(1); // Node with no children
+        BinarySearchTree<Integer, String> newTree = tree.remove(1);
 
         assertFalse(newTree.containsKey(1));
         assertNull(newTree.get(1));
-        assertTrue(tree.containsKey(1)); // Immutability check
+        assertTrue(tree.containsKey(1));
     }
 
     @Test
     void testRemoveNodeWithOneChild() {
-        BinarySearchTree<Integer, String> newTree = tree.remove(10); // Node with one child (14)
+        BinarySearchTree<Integer, String> newTree = tree.remove(10);
 
         assertFalse(newTree.containsKey(10));
-        assertTrue(newTree.containsKey(14)); // Check child is still there
-        assertTrue(tree.containsKey(10)); // Immutability check
+        assertTrue(newTree.containsKey(14));
+        assertTrue(tree.containsKey(10));
     }
 
     @Test
     void testRemoveNodeWithTwoChildren() {
-        BinarySearchTree<Integer, String> newTree = tree.remove(3); // Node with two children (1, 6)
+        BinarySearchTree<Integer, String> newTree = tree.remove(3);
 
         assertFalse(newTree.containsKey(3));
-        assertTrue(newTree.containsKey(1)); // Check children's context
+        assertTrue(newTree.containsKey(1));
         assertTrue(newTree.containsKey(6));
-        assertTrue(tree.containsKey(3)); // Immutability check
+        assertTrue(tree.containsKey(3));
     }
     
     @Test
     void testRemoveRoot() {
-        BinarySearchTree<Integer, String> newTree = tree.remove(8); // Root node
+        BinarySearchTree<Integer, String> newTree = tree.remove(8);
 
         assertFalse(newTree.containsKey(8));
-        assertEquals("Trece", newTree.get(13)); // A successor should be the new root
-        assertTrue(tree.containsKey(8)); // Immutability check
+        assertEquals("Trece", newTree.get(13));
+        assertTrue(tree.containsKey(8));
     }
 
     @Test
     void testRemoveNonExistentKey() {
         BinarySearchTree<Integer, String> newTree = tree.remove(99);
-        // The tree should be identical to the original
-        // assertSame(tree, newTree, "Removing a non-existent key should not change the tree");
-        // Note: Depending on implementation, it might return a new object or the same one.
-        // If the implementation creates a new wrapper even if nothing changed, assertSame might fail.
-        // Let's check content equality instead if assertSame fails, or just check content.
-        
-        // Checking content
-        assertEquals(tree.get(8), newTree.get(8));
-        assertEquals(tree.get(3), newTree.get(3));
+        assertSame(tree, newTree, "Removing a non-existent key should not change the tree");
     }
     
     @Test
@@ -131,6 +117,9 @@ class TreeTest {
         assertFalse(finalTree.containsKey(3));
         assertTrue(finalTree.containsKey(20));
         assertEquals("OCHO-RE-MODIFICADO", finalTree.get(8));
-        assertEquals("Ocho", tree.get(8)); // Immutability check on original
+        assertEquals("Ocho", tree.get(8));
     }
 }
+
+
+
